@@ -846,7 +846,6 @@ function App() {
             name="contact"
             method="POST"
             data-netlify="true"
-            action="/thank-you"
           >
             <input type="hidden" name="form-name" value="contact" />
             <VStack spacing={4} mt={4}>
@@ -856,6 +855,9 @@ function App() {
                 type="email"
                 required
                 maxW={{ base: "90%", md: "lg" }}
+                variant="filled" // Example of using a variant for styling
+                _focus={{ borderColor: "cyan.500" }} // Custom focus border color
+                focusBorderColor="cyan.500" 
               />
               <Button type="submit" colorScheme="blue">
                 Submit
