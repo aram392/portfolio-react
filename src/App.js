@@ -329,6 +329,11 @@ function App() {
     });
   };
 
+  const handleSubmit = async (event) => {
+  event.preventDefault(); // Prevent the form from navigating to a new page
+  // Form submission logic here (e.g., fetch API to submit form data)
+};
+
   return (
     <ChakraProvider theme={customTheme}>
       <ColorModeScript initialColorMode={customTheme.config.initialColorMode} />
@@ -842,7 +847,7 @@ function App() {
             opportunities, please enter your email address below and I'll be in
             touch soon.
           </Text>
-          <form name="contact" method="POST" data-netlify="true">
+          <form name="contact" method="POST" data-netlify="true" onSubmit={handleSubmit}>
             <input type="hidden" name="form-name" value="contact" />
             <VStack spacing={4} mt={4}>
               <Input
