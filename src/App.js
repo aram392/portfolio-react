@@ -842,11 +842,7 @@ function App() {
             opportunities, please enter your email address below and I'll be in
             touch soon.
           </Text>
-          <form
-            name="contact"
-            method="POST"
-            data-netlify="true"
-          >
+          <form name="contact" method="POST" data-netlify="true">
             <input type="hidden" name="form-name" value="contact" />
             <VStack spacing={4} mt={4}>
               <Input
@@ -857,7 +853,7 @@ function App() {
                 maxW={{ base: "90%", md: "lg" }}
                 variant="filled" // Example of using a variant for styling
                 _focus={{ borderColor: "cyan.500" }} // Custom focus border color
-                focusBorderColor="cyan.500" 
+                focusBorderColor="cyan.500"
               />
               <Button type="submit" colorScheme="blue">
                 Submit
