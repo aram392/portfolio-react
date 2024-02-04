@@ -912,9 +912,9 @@ const MainPage = () => {
             touch soon.
           </Text>
           <form
-            name="contact"
-            method="POST"
-            data-netlify="true"
+            name="email"
+            method="post"
+            netlify
             target="hidden-form-handler"
             onSubmit={handleSubmit}
             style={formStyle}
@@ -924,7 +924,6 @@ const MainPage = () => {
               style={{ display: "none" }}
               title="Form submission handler"
             ></iframe>
-            <input type="hidden" name="form-name" value="contact" />
             <div style={labelContainerStyle}>
               <label style={{ textAlign: "center", width: "100%" }}>
                 Your email address:
