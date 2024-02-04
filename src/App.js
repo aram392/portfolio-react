@@ -959,6 +959,7 @@ function App() {
       <Router>
         <Routes>
           <Route path="/" element={<MainPage />} />
+          <Route path="/thanks" element={<ThankYouPage />} />
         </Routes>
       </Router>
     </ChakraProvider>
