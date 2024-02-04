@@ -912,6 +912,21 @@ const MainPage = () => {
             opportunities, please enter your email address below and I'll be in
             touch soon.
           </Text>
+          <form name="contact" method="POST" data-netlify="true">
+            <input type="hidden" name="form-name" value="contact" />
+            <p>
+              <label htmlFor="name">Name</label>
+              <input type="text" id="name" name="name" />
+            </p>
+            <p>
+              <label htmlFor="email">Email</label>
+              <input type="text" id="email" name="email" />
+            </p>
+            <p>
+              <button type="submit">Send</button>
+            </p>
+          </form>
+
           <form
             name="contact"
             method="post"
@@ -944,7 +959,6 @@ function App() {
       <Router>
         <Routes>
           <Route path="/" element={<MainPage />} />
-          <Route path="/thanks" element={<ThankYouPage />} />
         </Routes>
       </Router>
     </ChakraProvider>
