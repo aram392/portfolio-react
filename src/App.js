@@ -884,11 +884,12 @@ const MainPage = () => {
         </VStack>
         <Box mt={10}>
           <Text
-            fontSize="xl"
+            fontSize="lg"
             fontWeight="bold"
             fontFamily="heading"
             color="gray.100"
             textAlign="center"
+            pb={4}
           >
             If you're interested in discussing my work or potential
             opportunities, please enter your email address below and I'll be in
@@ -907,6 +908,7 @@ const MainPage = () => {
                 value={emailToStore}
                 onChange={(e) => setEmailToStore(e.target.value)}
                 type="email"
+                bg="gray.700"
                 mb={4} // Margin bottom for spacing between the Input and Button
                 maxW={{ base: "90%", md: "lg" }} // Max width to control the size of the Input
               />
