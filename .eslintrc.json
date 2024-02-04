@@ -4,6 +4,6 @@
       "plugin:prettier/recommended"
     ],
     "rules": {
-      // your custom rules here
+       "prettier/prettier": "warn" 
     }
   } 
