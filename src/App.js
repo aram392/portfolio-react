@@ -912,6 +912,25 @@ const MainPage = () => {
             opportunities, please enter your email address below and I'll be in
             touch soon.
           </Text>
+          <form name="contact" method="post">
+            <input type="hidden" name="form-name" value="contact" />
+            <p>
+              <label htmlFor="name">Name</label> <br />
+              <input type="text" id="name" name="name" required />
+            </p>
+            <p>
+              <label htmlFor="email">Email</label> <br />
+              <input type="email" id="email" name="email" required />
+            </p>
+            <p>
+              <label htmlFor="message">Message</label> <br />
+              <textarea id="message" name="message" required></textarea>
+            </p>
+            <p>
+              <input type="submit" value="Submit message" />
+            </p>
+          </form>
+
           <form name="contact" method="POST" data-netlify="true">
             <input type="hidden" name="form-name" value="contact" />
             <p>
@@ -948,6 +967,24 @@ const MainPage = () => {
         </Box>
         <ContactForm></ContactForm>
       </Box>
+      <form name="contact" method="post">
+        <input type="hidden" name="form-name" value="contact" />
+        <p>
+          <label htmlFor="name">Name</label> <br />
+          <input type="text" id="name" name="name" required />
+        </p>
+        <p>
+          <label htmlFor="email">Email</label> <br />
+          <input type="email" id="email" name="email" required />
+        </p>
+        <p>
+          <label htmlFor="message">Message</label> <br />
+          <textarea id="message" name="message" required></textarea>
+        </p>
+        <p>
+          <input type="submit" value="Submit message" />
+        </p>
+      </form>
       {showConfetti && <Confetti />}
     </ChakraProvider>
   );
