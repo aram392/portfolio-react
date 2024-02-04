@@ -901,7 +901,8 @@ const MainPage = () => {
               align="center" // Center children horizontally
               justify="center" // Center children vertically (if needed)
               width="full" // Take full width of its parent to ensure centering
-              mb={4} // Margin bottom for spacing
+              mb={4}
+              // Margin bottom for spacing
             >
               <Input
                 placeholder="Enter your email"
@@ -909,8 +910,12 @@ const MainPage = () => {
                 onChange={(e) => setEmailToStore(e.target.value)}
                 type="email"
                 bg="gray.700"
-                mb={4} // Margin bottom for spacing between the Input and Button
-                maxW={{ base: "90%", md: "lg" }} // Max width to control the size of the Input
+                color="cyan.500" // Set text color to cyan
+                borderColor="cyan.500" // Set border color to cyan
+                borderWidth="1px" // Ensure the border is visible
+                mb={4}
+                maxW={{ base: "90%", md: "lg" }}
+                _placeholder={{ color: "cyan.500" }}
               />
               <Button type="submit" colorScheme="blue" isLoading={isLoading}>
                 Submit
