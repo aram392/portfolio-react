@@ -1,5 +1,10 @@
 import React, { useState, useRef } from "react";
-import { HashRouter as Router, Route, Routes } from "react-router-dom";
+import {
+  HashRouter as Router,
+  Route,
+  Routes,
+  useNavigate,
+} from "react-router-dom";
 
 import {
   Flex,
@@ -339,6 +344,23 @@ const MainPage = () => {
       isClosable: true,
     });
   };
+
+  const navigate = useNavigate();
+  const [formSubmitted, setFormSubmitted] = useState(false);
+
+  const handleSubmit = (e) => {
+    // Prevent the default form submission since we're handling it via iframe
+    e.preventDefault();
+    setFormSubmitted(true);
+  };
+
+  // Use useEffect to react to form submission state change
+  React.useEffect(() => {
+    if (formSubmitted) {
+      // Navigate to the thank you page
+      navigate("/thanks"); // Adjusted for HashRouter
+    }
+  }, [formSubmitted, navigate]);
 
   const formStyle = {
     display: "flex",
@@ -893,9 +915,15 @@ const MainPage = () => {
             name="contact"
             method="POST"
             data-netlify="true"
-            action="/thanks"
+            target="hidden-form-handler"
+            onSubmit={handleSubmit}
             style={formStyle}
           >
+            <iframe
+              name="hidden-form-handler"
+              style={{ display: "none" }}
+              title="Form submission handler"
+            ></iframe>
             <input type="hidden" name="form-name" value="contact" />
             <div style={labelContainerStyle}>
               <label style={{ textAlign: "center", width: "100%" }}>
