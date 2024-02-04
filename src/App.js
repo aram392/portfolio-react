@@ -1,10 +1,5 @@
 import React, { useState, useRef } from "react";
-import {
-  HashRouter as Router,
-  Route,
-  Routes,
-  useNavigate,
-} from "react-router-dom";
+import { HashRouter as Router, Route, Routes } from "react-router-dom";
 
 import {
   Flex,
@@ -40,6 +35,7 @@ import {
   Link,
   useClipboard,
   useToast,
+  Input,
 } from "@chakra-ui/react";
 
 import { FaLinkedin, FaEnvelope } from "react-icons/fa";
@@ -50,7 +46,6 @@ import { List, ListItem, ListIcon } from "@chakra-ui/react";
 import { MdCheckCircle } from "react-icons/md"; // This is just an example icon, you can choose any
 
 import Confetti from "react-confetti";
-import ContactForm from "./ContactForm";
 
 const projects = [
   {
@@ -307,6 +302,9 @@ const MainPage = () => {
   const aboutMeRef = useRef(null);
   const contactRef = useRef(null);
   const topRef = useRef(null);
+  const [isLoading, setIsLoading] = useState(false);
+
+  const [emailToStore, setEmailToStore] = useState("");
 
   // Helper function to calculate the top position of an element relative to the document
   const getTopPosition = (element) => {
@@ -346,57 +344,41 @@ const MainPage = () => {
     });
   };
 
-  const navigate = useNavigate();
-  const [formSubmitted, setFormSubmitted] = useState(false);
-
-  const handleSubmit = (e) => {
-    // Prevent the default form submission since we're handling it via iframe
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setFormSubmitted(true);
-  };
+    setIsLoading(true); // Start loading
+    try {
+      const response = await fetch(process.env.REACT_APP_LAMBDA_ENDPOINT, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email: emailToStore }),
+      });
 
-  // Use useEffect to react to form submission state change
-  React.useEffect(() => {
-    if (formSubmitted) {
-      // Navigate to the thank you page
-      navigate("/thanks"); // Adjusted for HashRouter
+      if (response.ok) {
+        toast({
+          title: "Success",
+          description: "We've received your email. Thank you!",
+          status: "success",
+          duration: 9000,
+          isClosable: true,
+        });
+        setEmailToStore(""); // Reset email input after successful submission
+      } else {
+        throw new Error("Network response was not ok.");
+      }
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "There was an error processing your request.",
+        status: "error",
+        duration: 9000,
+        isClosable: true,
+      });
+    } finally {
+      setIsLoading(false); // End loading
     }
-  }, [formSubmitted, navigate]);
-
-  const formStyle = {
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    justifyContent: "center",
-    width: "100%", // Ensure the form takes the full width to center everything correctly
-  };
-
-  const labelContainerStyle = {
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    width: "100%", // Make sure the container takes the full width for correct centering
-  };
-
-  const inputStyle = {
-    padding: "10px",
-    margin: "5px 0 5px 0", // Adjusted margin for spacing
-    width: "80%", // Make input narrower
-    maxWidth: "300px", // Set a max width to make the input narrower
-    border: "2px solid #CBD5E0", // Chakra UI's gray.300
-    borderRadius: "0.375rem", // Equivalent to 6px, similar to Chakra UI's md radius
-    outline: "none",
-  };
-
-  const buttonStyle = {
-    backgroundColor: "#4299E1", // Chakra UI's blue.500
-    color: "white",
-    padding: "10px 20px",
-    margin: "5px 0",
-    border: "none",
-    borderRadius: "0.375rem", // Similar to Chakra UI's md radius
-    cursor: "pointer",
-    outline: "none",
   };
 
   return (
@@ -912,79 +894,21 @@ const MainPage = () => {
             opportunities, please enter your email address below and I'll be in
             touch soon.
           </Text>
-          <form name="contact" method="post">
-            <input type="hidden" name="form-name" value="contact" />
-            <p>
-              <label htmlFor="name">Name</label> <br />
-              <input type="text" id="name" name="name" required />
-            </p>
-            <p>
-              <label htmlFor="email">Email</label> <br />
-              <input type="email" id="email" name="email" required />
-            </p>
-            <p>
-              <label htmlFor="message">Message</label> <br />
-              <textarea id="message" name="message" required></textarea>
-            </p>
-            <p>
-              <input type="submit" value="Submit message" />
-            </p>
-          </form>
-
-          <form name="contact" method="POST" data-netlify="true">
-            <input type="hidden" name="form-name" value="contact" />
-            <p>
-              <label htmlFor="name">Name</label>
-              <input type="text" id="name" name="name" />
-            </p>
-            <p>
-              <label htmlFor="email">Email</label>
-              <input type="text" id="email" name="email" />
-            </p>
-            <p>
-              <button type="submit">Send</button>
-            </p>
-          </form>
-
-          <form
-            name="contact"
-            method="post"
-            netlify
-            target="hidden-form-handler"
-            onSubmit={handleSubmit}
-            style={formStyle}
-          >
-            <div style={labelContainerStyle}>
-              <label style={{ textAlign: "center", width: "100%" }}>
-                Your email address:
-                <input type="email" name="email" required style={inputStyle} />
-              </label>
-            </div>
-            <button type="submit" style={buttonStyle}>
+          <form onSubmit={handleSubmit}>
+            <Input
+              placeholder="Enter your email"
+              value={emailToStore}
+              onChange={(e) => setEmailToStore(e.target.value)}
+              type="email"
+              mb={4}
+            />
+            <Button type="submit" colorScheme="blue" isLoading={isLoading}>
               Submit
-            </button>
+            </Button>
           </form>
         </Box>
-        <ContactForm></ContactForm>
       </Box>
-      <form name="contact" method="post">
-        <input type="hidden" name="form-name" value="contact" />
-        <p>
-          <label htmlFor="name">Name</label> <br />
-          <input type="text" id="name" name="name" required />
-        </p>
-        <p>
-          <label htmlFor="email">Email</label> <br />
-          <input type="email" id="email" name="email" required />
-        </p>
-        <p>
-          <label htmlFor="message">Message</label> <br />
-          <textarea id="message" name="message" required></textarea>
-        </p>
-        <p>
-          <input type="submit" value="Submit message" />
-        </p>
-      </form>
+
       {showConfetti && <Confetti />}
     </ChakraProvider>
   );
