@@ -37,8 +37,6 @@ import {
 
 import { FaLinkedin, FaEnvelope } from "react-icons/fa";
 
-import { Input } from "@chakra-ui/react";
-
 import "react-multi-carousel/lib/styles.css";
 import BackgroundCarousel from "./BackgroundCarousel";
 import { List, ListItem, ListIcon } from "@chakra-ui/react";
@@ -335,41 +333,40 @@ function App() {
   };
 
   const formStyle = {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'center',
-    width: '100%', // Ensure the form takes the full width to center everything correctly
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
+    width: "100%", // Ensure the form takes the full width to center everything correctly
   };
 
   const labelContainerStyle = {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    width: '100%', // Make sure the container takes the full width for correct centering
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    width: "100%", // Make sure the container takes the full width for correct centering
   };
 
   const inputStyle = {
-    padding: '10px',
-    margin: '5px 0 5px 0', // Adjusted margin for spacing
-    width: '80%', // Make input narrower
-    maxWidth: '300px', // Set a max width to make the input narrower
-    border: '2px solid #CBD5E0', // Chakra UI's gray.300
-    borderRadius: '0.375rem', // Equivalent to 6px, similar to Chakra UI's md radius
-    outline: 'none',
+    padding: "10px",
+    margin: "5px 0 5px 0", // Adjusted margin for spacing
+    width: "80%", // Make input narrower
+    maxWidth: "300px", // Set a max width to make the input narrower
+    border: "2px solid #CBD5E0", // Chakra UI's gray.300
+    borderRadius: "0.375rem", // Equivalent to 6px, similar to Chakra UI's md radius
+    outline: "none",
   };
 
   const buttonStyle = {
-    backgroundColor: '#4299E1', // Chakra UI's blue.500
-    color: 'white',
-    padding: '10px 20px',
-    margin: '5px 0',
-    border: 'none',
-    borderRadius: '0.375rem', // Similar to Chakra UI's md radius
-    cursor: 'pointer',
-    outline: 'none',
+    backgroundColor: "#4299E1", // Chakra UI's blue.500
+    color: "white",
+    padding: "10px 20px",
+    margin: "5px 0",
+    border: "none",
+    borderRadius: "0.375rem", // Similar to Chakra UI's md radius
+    cursor: "pointer",
+    outline: "none",
   };
-
 
   return (
     <ChakraProvider theme={customTheme}>
@@ -885,28 +882,23 @@ function App() {
             touch soon.
           </Text>
           <form
-      name="contact"
-      method="POST"
-      data-netlify="true"
-      onSubmit={handleSubmit}
-      style={formStyle}
-    >
-      <input type="hidden" name="form-name" value="contact" />
-      <div style={labelContainerStyle}>
-        <label style={{ textAlign: 'center', width: '100%' }}>
-          Your email address:
-        </label>
-        <input
-          type="email"
-          name="email"
-          required
-          style={inputStyle}
-        />
-      </div>
-      <button type="submit" style={buttonStyle}>
-        Submit
-      </button>
-    </form>
+            name="contact"
+            method="POST"
+            data-netlify="true"
+            onSubmit={handleSubmit}
+            style={formStyle}
+          >
+            <input type="hidden" name="form-name" value="contact" />
+            <div style={labelContainerStyle}>
+              <label style={{ textAlign: "center", width: "100%" }}>
+                Your email address:
+              </label>
+              <input type="email" name="email" required style={inputStyle} />
+            </div>
+            <button type="submit" style={buttonStyle}>
+              Submit
+            </button>
+          </form>
         </Box>
       </Box>
       {showConfetti && <Confetti />}
