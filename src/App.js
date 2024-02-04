@@ -895,16 +895,25 @@ const MainPage = () => {
             touch soon.
           </Text>
           <form onSubmit={handleSubmit}>
-            <Input
-              placeholder="Enter your email"
-              value={emailToStore}
-              onChange={(e) => setEmailToStore(e.target.value)}
-              type="email"
-              mb={4}
-            />
-            <Button type="submit" colorScheme="blue" isLoading={isLoading}>
-              Submit
-            </Button>
+            <Flex
+              direction="column" // Stack children vertically
+              align="center" // Center children horizontally
+              justify="center" // Center children vertically (if needed)
+              width="full" // Take full width of its parent to ensure centering
+              mb={4} // Margin bottom for spacing
+            >
+              <Input
+                placeholder="Enter your email"
+                value={emailToStore}
+                onChange={(e) => setEmailToStore(e.target.value)}
+                type="email"
+                mb={4} // Margin bottom for spacing between the Input and Button
+                maxW={{ base: "90%", md: "lg" }} // Max width to control the size of the Input
+              />
+              <Button type="submit" colorScheme="blue" isLoading={isLoading}>
+                Submit
+              </Button>
+            </Flex>
           </form>
         </Box>
       </Box>
