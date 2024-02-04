@@ -912,23 +912,18 @@ const MainPage = () => {
             touch soon.
           </Text>
           <form
-            name="email"
+            name="contact"
             method="post"
             netlify
             target="hidden-form-handler"
             onSubmit={handleSubmit}
             style={formStyle}
           >
-            <iframe
-              name="hidden-form-handler"
-              style={{ display: "none" }}
-              title="Form submission handler"
-            ></iframe>
             <div style={labelContainerStyle}>
               <label style={{ textAlign: "center", width: "100%" }}>
                 Your email address:
+                <input type="email" name="email" required style={inputStyle} />
               </label>
-              <input type="email" name="email" required style={inputStyle} />
             </div>
             <button type="submit" style={buttonStyle}>
               Submit
