@@ -1,10 +1,5 @@
 import React, { useState, useRef } from "react";
-import {
-  BrowserRouter as Router,
-  Route,
-  Routes,
-  useNavigate,
-} from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 import {
   Flex,
@@ -899,6 +894,7 @@ const MainPage = () => {
             method="POST"
             data-netlify="true"
             action="/thanks"
+            style={formStyle}
           >
             <input type="hidden" name="form-name" value="contact" />
             <div style={labelContainerStyle}>
