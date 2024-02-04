@@ -1,5 +1,12 @@
 import React, { useState, useRef } from "react";
 import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+  useNavigate,
+} from "react-router-dom";
+
+import {
   Flex,
   Box,
   VStack,
@@ -274,7 +281,18 @@ const customTheme = extendTheme({
   },
 });
 
-function App() {
+const ThankYouPage = () => {
+  return (
+    <VStack spacing={4} mt={10}>
+      <Text fontSize="2xl" fontWeight="bold">
+        Thank You!
+      </Text>
+      <Text>Your submission has been received.</Text>
+    </VStack>
+  );
+};
+
+const MainPage = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [openProjectId, setOpenProjectId] = useState(null);
 
@@ -325,11 +343,6 @@ function App() {
       duration: 5000,
       isClosable: true,
     });
-  };
-
-  const handleSubmit = async (event) => {
-    event.preventDefault(); // Prevent the form from navigating to a new page
-    // Form submission logic here (e.g., fetch API to submit form data)
   };
 
   const formStyle = {
@@ -885,8 +898,7 @@ function App() {
             name="contact"
             method="POST"
             data-netlify="true"
-            onSubmit={handleSubmit}
-            style={formStyle}
+            action="/thanks"
           >
             <input type="hidden" name="form-name" value="contact" />
             <div style={labelContainerStyle}>
@@ -904,6 +916,18 @@ function App() {
       {showConfetti && <Confetti />}
     </ChakraProvider>
   );
-}
+};
 
+function App() {
+  return (
+    <ChakraProvider theme={customTheme}>
+      <Router>
+        <Routes>
+          <Route path="/" element={<MainPage />} />
+          <Route path="/thanks" element={<ThankYouPage />} />
+        </Routes>
+      </Router>
+    </ChakraProvider>
+  );
+}
 export default App;
