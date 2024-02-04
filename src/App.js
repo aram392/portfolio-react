@@ -50,6 +50,7 @@ import { List, ListItem, ListIcon } from "@chakra-ui/react";
 import { MdCheckCircle } from "react-icons/md"; // This is just an example icon, you can choose any
 
 import Confetti from "react-confetti";
+import ContactForm from "./ContactForm";
 
 const projects = [
   {
@@ -930,6 +931,7 @@ const MainPage = () => {
             </button>
           </form>
         </Box>
+        <ContactForm></ContactForm>
       </Box>
       {showConfetti && <Confetti />}
     </ChakraProvider>
